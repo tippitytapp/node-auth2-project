@@ -4,6 +4,7 @@ const bcryptjs = require('bcryptjs');
 
 
 
+
 // check to make sure new user info is valid before registering
 const validate = (req, res, next) => {
     const user = req.body;
@@ -27,6 +28,8 @@ const validate = (req, res, next) => {
         next();
     }
 }
+
+
 
 
 // hashing password on register

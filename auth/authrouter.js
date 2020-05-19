@@ -8,6 +8,7 @@ const Users = require('../users/usersmodel.js');
 router.post('/register', validate, (req, res) => {
     const user = req.body;
     const newUser = passHash(user)
+    console.log(newUser)
     Users.add(newUser)
         .then(user => {
             res.status(201).json({
@@ -27,10 +28,12 @@ router.post('/login', (req, res) => {
     if(isValid(req.body)){
         Users.findUsersBy({username})
             .then(([user]) => {
+                console.log([user])
                 if(user && bcryptjs.compareSync(password, user.password)){
                     token = createToken(user)
                     res.status(200).json({
                         message: "Logged in successfully",
+                        user,
                         token
                     })
                 } else {
@@ -40,7 +43,9 @@ router.post('/login', (req, res) => {
                 }
             })
             .catch(error => {
+                console.log(error)
                 res.status(500).json({
+                    error,
                     message: error.message
                 })
             })

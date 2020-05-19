@@ -9,15 +9,19 @@ module.exports={
     findById
 }
 function findAllUsers(){
-    return db('users')
+    return db('users as u')
+            .join('departments as d', 'd.id', '=', 'u.dept_id')
+            .select('u.id', 'u.name', 'u.username', 'd.name as dept')
 }
 function findAllDepartments(){
     return db('departments')
 }
 function findUsersBy(filter){
-    return db('users')
+    // console.log(filter)
+       return db('users as u')
             .where(filter)
-            .orderBy('id')
+            .join('departments as d',  'u.dept_id','d.id')
+            .select('u.id', 'u.name', 'u.username', 'u.password', 'u.dept_id', 'd.name as dept')
 }
 function findUsersByDepartment(filter){
     return db('users')
