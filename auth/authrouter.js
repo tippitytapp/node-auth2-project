@@ -25,7 +25,7 @@ router.post('/register', validate, (req, res) => {
 router.post('/login', (req, res) => {
     const {username, password} = req.body;
     if(isValid(req.body)){
-        Users.findBy({username})
+        Users.findUsersBy({username})
             .then(([user]) => {
                 if(user && bcryptjs.compareSync(password, user.password)){
                     token = createToken(user)

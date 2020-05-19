@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {jwtSecret} = require('./secrets.ks');
+const secrets = require('./secrets.js');
 const bcryptjs = require('bcryptjs');
 
 
@@ -50,7 +50,7 @@ function createToken(user){
     const options = {
         expiresIn: '24h'
     }
-    return jwt.sign(payload, jwtSecret, options)
+    return jwt.sign(payload, secrets.jwtSecret, options)
 }
 
 
@@ -59,7 +59,7 @@ function createToken(user){
 const verifyToken = (req, res, next) => {
     const token = req.headers.authorization;
     if(token){
-        jwt.verify(token, jwtSecret, (err, decToken) => {
+        jwt.verify(token, secrets.jwtSecret, (err, decToken) => {
             if(err){
                 res.status(401).json({
                         message: "Invalid Authorization Received"
