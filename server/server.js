@@ -5,7 +5,7 @@ const session = require('session');
 const server = express();
 const AuthRouter = requrie('./auth/authrouter.js');
 const UsersRouter = require('./users/usersrouter.js');
-const {sessionConfig} = require('./auth/cookieConfig.js');
+const {sessionConfig} = require('./auth/configs.js');
 
 server.use(session(sessionConfig))
 server.use(express.json());
