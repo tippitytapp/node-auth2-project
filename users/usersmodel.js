@@ -6,7 +6,8 @@ module.exports={
     findAllDepartments,
     findUsersBy,
     findUsersByDepartment,
-    findById
+    findById,
+    findDeptById
 }
 function findAllUsers(){
     return db('users as u')
@@ -41,4 +42,8 @@ async function add(user){
     } catch(error){
         throw error;
     }
+}
+function findDeptById(id){
+    return db('departments')
+            .where(id)
 }

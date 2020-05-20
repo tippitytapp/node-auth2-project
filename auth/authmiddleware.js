@@ -30,8 +30,6 @@ const validate = (req, res, next) => {
 }
 
 
-
-
 // hashing password on register
 
 function passHash(info){
@@ -48,7 +46,7 @@ function createToken(user){
         sub: user.id,
         name: user.name,
         username: user.username,
-        department: user.department
+        department: user.dept_id
     };
     const options = {
         expiresIn: '24h'
